@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Sora:wght@400;600;700;800&display=swap');
+@import "tailwindcss";
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #09090f;
+  --bg2:       #0d0d1a;
+  --card:      rgba(255,255,255,0.03);
+  --border:    rgba(255,255,255,0.07);
+  --border2:   rgba(255,255,255,0.12);
+  --grad:      linear-gradient(135deg, #9b51e0, #0693e3);
+  --up:        #00d084;
+  --down:      #ff4d6d;
+  --text:      rgba(255,255,255,0.87);
+  --muted:     rgba(255,255,255,0.35);
+  --faint:     rgba(255,255,255,0.12);
+  --purple:    #9b51e0;
+  --cyan:      #0693e3;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(155,81,224,0.25); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(155,81,224,0.45); }
+
+/* ── Pill button ── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+  padding: 6px 18px;
+  white-space: nowrap;
+}
+.pill-active {
+  background: linear-gradient(135deg, #9b51e0, #0693e3);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(155,81,224,0.35);
+}
+.pill-inactive {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  color: rgba(255,255,255,0.3);
+}
+.pill-inactive:hover {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.65);
+  border-color: rgba(255,255,255,0.15) !important;
+}
+
+/* ── Gradient text ── */
+.grad-text {
+  background: linear-gradient(135deg, #9b51e0, #0693e3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Card ── */
+.aq-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.aq-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #9b51e0, #0693e3, transparent);
+}
+
+/* ── Badge ── */
+.badge-up {
+  background: rgba(0,208,132,0.12);
+  border: 1px solid rgba(0,208,132,0.28);
+  color: #00d084;
+  border-radius: 9999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+}
+.badge-down {
+  background: rgba(255,77,109,0.12);
+  border: 1px solid rgba(255,77,109,0.28);
+  color: #ff4d6d;
+  border-radius: 9999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+}
+
+/* ── Input ── */
+.aq-input {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 9999px;
+  color: rgba(255,255,255,0.87);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  outline: none;
+  padding: 8px 18px;
+  transition: border-color 0.2s;
+}
+.aq-input:focus {
+  border-color: rgba(155,81,224,0.5);
+}
+.aq-input::placeholder {
+  color: rgba(255,255,255,0.2);
+}
+
+/* ── Mono label ── */
+.mono-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
