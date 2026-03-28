@@ -2,11 +2,22 @@ import { useEffect, useRef, useState } from 'react'
 import useWatchlistStore from '../store/useWatchlistStore'
 import useStore from '../store/useStore'
 
-const MONO = "'JetBrains Mono', monospace"
-const GRAD = 'linear-gradient(135deg, #9b51e0, #0693e3)'
-const BORDER = 'rgba(255,255,255,0.07)'
-const UP   = '#00d084'
-const DOWN = '#ff4d6d'
+const C = {
+  bg:      '#141210',
+  nav:     '#1C1410',
+  border:  'rgba(201,169,110,0.18)',
+  parchment: '#EDE5D0',
+  muted:   '#7A6A58',
+  faint:   'rgba(181,168,152,0.25)',
+  gold:    '#C9A96E',
+  up:      '#6DAA6D',
+  down:    '#C8544A',
+}
+const F = {
+  display: "'Cormorant Garamond', serif",
+  mono:    "'JetBrains Mono', monospace",
+  label:   "'Josefin Sans', sans-serif",
+}
 
 const FlashCell = ({ value, format }) => {
   const [flash, setFlash] = useState(null)
@@ -22,8 +33,10 @@ const FlashCell = ({ value, format }) => {
 
   return (
     <span style={{
-      fontFamily: MONO, fontSize: 12, fontWeight: 600,
-      color: flash === 'up' ? UP : flash === 'down' ? DOWN : 'rgba(255,255,255,0.87)',
+      fontFamily: F.mono,
+      fontSize: 12,
+      fontWeight: 600,
+      color: flash === 'up' ? C.up : flash === 'down' ? C.down : C.parchment,
       transition: 'color 0.3s',
     }}>
       {format(value)}
@@ -64,20 +77,20 @@ export default function Watchlist() {
   return (
     <div style={{
       width: 220,
-      borderLeft: `1px solid ${BORDER}`,
-      background: '#0a0a12',
+      borderLeft: `1px solid ${C.border}`,
+      background: C.nav,
       display: 'flex',
       flexDirection: 'column',
       height: '100%',
       flexShrink: 0,
     }}>
       {/* Header */}
-      <div style={{ padding: '16px 14px 12px', borderBottom: `1px solid ${BORDER}` }}>
-        <div style={{ fontFamily: MONO, fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: 12 }}>
+      <div style={{ padding: '16px 14px 14px', borderBottom: `1px solid ${C.border}` }}>
+        <div style={{ fontFamily: F.label, fontSize: 8, letterSpacing: '0.18em', textTransform: 'uppercase', color: C.muted, marginBottom: 12 }}>
           Watchlist
         </div>
 
-        {/* Add input — pill style */}
+        {/* Add input */}
         <form onSubmit={handleAdd} style={{ display: 'flex', gap: 6 }}>
           <input
             value={input}
@@ -85,25 +98,26 @@ export default function Watchlist() {
             placeholder="Add symbol..."
             style={{
               flex: 1,
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              borderRadius: 9999,
-              color: 'rgba(255,255,255,0.87)',
-              fontFamily: MONO,
+              background: 'transparent',
+              border: `1px solid ${C.border}`,
+              color: C.parchment,
+              fontFamily: F.mono,
               fontSize: 11,
               letterSpacing: '0.04em',
-              padding: '5px 12px',
+              padding: '5px 10px',
               outline: 'none',
+              transition: 'border-color 0.2s',
             }}
+            onFocus={e => e.target.style.borderColor = 'rgba(201,169,110,0.5)'}
+            onBlur={e => e.target.style.borderColor = C.border}
           />
           <button type="submit" style={{
-            background: GRAD,
-            border: 'none',
-            borderRadius: 9999,
-            color: '#fff',
-            fontFamily: MONO,
+            background: 'rgba(201,169,110,0.12)',
+            border: `1px solid ${C.border}`,
+            color: C.gold,
+            fontFamily: F.mono,
             fontSize: 14,
-            fontWeight: 700,
+            fontWeight: 300,
             width: 30,
             height: 30,
             cursor: 'pointer',
@@ -111,13 +125,17 @@ export default function Watchlist() {
             alignItems: 'center',
             justifyContent: 'center',
             flexShrink: 0,
-          }}>+</button>
+            transition: 'all 0.15s',
+          }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(201,169,110,0.22)'; e.currentTarget.style.borderColor = C.gold }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(201,169,110,0.12)'; e.currentTarget.style.borderColor = C.border }}
+          >+</button>
         </form>
       </div>
 
       {/* Symbol list */}
       <div style={{ flex: 1, overflowY: 'auto', padding: '8px 10px' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {watchlist.map(sym => {
             const data = prices[sym]
             const isPos = (data?.change_pct ?? 0) >= 0
@@ -126,9 +144,8 @@ export default function Watchlist() {
                 key={sym}
                 onClick={() => setSymbol(sym)}
                 style={{
-                  background: 'rgba(255,255,255,0.03)',
-                  border: `1px solid ${BORDER}`,
-                  borderRadius: 12,
+                  background: 'transparent',
+                  border: `1px solid ${C.border}`,
                   padding: '9px 12px',
                   cursor: 'pointer',
                   display: 'flex',
@@ -137,41 +154,39 @@ export default function Watchlist() {
                   transition: 'all 0.15s',
                 }}
                 onMouseEnter={e => {
-                  e.currentTarget.style.background = 'rgba(155,81,224,0.08)'
-                  e.currentTarget.style.borderColor = 'rgba(155,81,224,0.2)'
+                  e.currentTarget.style.background = 'rgba(201,169,110,0.06)'
+                  e.currentTarget.style.borderColor = 'rgba(201,169,110,0.35)'
                 }}
                 onMouseLeave={e => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.03)'
-                  e.currentTarget.style.borderColor = BORDER
+                  e.currentTarget.style.background = 'transparent'
+                  e.currentTarget.style.borderColor = C.border
                 }}
               >
-                {/* Left: symbol + change */}
                 <div>
-                  <div style={{ fontFamily: MONO, fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.87)', letterSpacing: '0.04em' }}>{sym}</div>
+                  <div style={{ fontFamily: F.mono, fontSize: 12, fontWeight: 700, color: C.parchment, letterSpacing: '0.04em' }}>{sym}</div>
                   {data && (
-                    <div style={{ fontFamily: MONO, fontSize: 9, color: isPos ? UP : DOWN, marginTop: 3, fontWeight: 600 }}>
+                    <div style={{ fontFamily: F.mono, fontSize: 9, color: isPos ? C.up : C.down, marginTop: 3, fontWeight: 600 }}>
                       {isPos ? '▲' : '▼'} {isPos ? '+' : ''}{data.change_pct?.toFixed(2)}%
                     </div>
                   )}
                 </div>
 
-                {/* Right: price + remove */}
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 4 }}>
                   {data ? (
                     <FlashCell value={data.price} format={(v) => `$${v?.toFixed(2)}`} />
                   ) : (
-                    <span style={{ fontFamily: MONO, fontSize: 11, color: 'rgba(255,255,255,0.12)' }}>—</span>
+                    <span style={{ fontFamily: F.mono, fontSize: 11, color: C.faint }}>—</span>
                   )}
                   <button
                     onClick={(e) => { e.stopPropagation(); removeSymbol(sym) }}
                     style={{
                       background: 'none', border: 'none',
-                      color: 'rgba(255,255,255,0.12)', cursor: 'pointer',
+                      color: C.faint, cursor: 'pointer',
                       fontSize: 10, padding: 0, lineHeight: 1,
-                      fontFamily: MONO, transition: 'color 0.15s',
+                      fontFamily: F.mono, transition: 'color 0.15s',
                     }}
-                    onMouseEnter={e => e.currentTarget.style.color = DOWN}
-                    onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.12)'}
+                    onMouseEnter={e => e.currentTarget.style.color = C.down}
+                    onMouseLeave={e => e.currentTarget.style.color = C.faint}
                   >✕</button>
                 </div>
               </div>
@@ -181,8 +196,8 @@ export default function Watchlist() {
       </div>
 
       {/* Footer */}
-      <div style={{ padding: '10px 14px', borderTop: `1px solid ${BORDER}` }}>
-        <div style={{ fontFamily: MONO, fontSize: 8, color: 'rgba(255,255,255,0.1)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+      <div style={{ padding: '10px 14px', borderTop: `1px solid ${C.border}` }}>
+        <div style={{ fontFamily: F.label, fontSize: 7, color: C.faint, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
           Updates every 15s
         </div>
       </div>

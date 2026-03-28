@@ -1,15 +1,24 @@
 import { useState, useEffect, useRef } from 'react'
 import { searchSymbols } from '../services/api'
 
-const MONO = "'JetBrains Mono', monospace"
-const BORDER = 'rgba(255,255,255,0.08)'
-const GRAD = 'linear-gradient(135deg, #9b51e0, #0693e3)'
+const C = {
+  bg:      '#141210',
+  nav:     '#1C1410',
+  border:  'rgba(201,169,110,0.18)',
+  parchment: '#EDE5D0',
+  muted:   '#7A6A58',
+  gold:    '#C9A96E',
+}
+const F = {
+  mono:  "'JetBrains Mono', monospace",
+  label: "'Josefin Sans', sans-serif",
+}
 
 export default function SearchBar({ onSelect }) {
-  const [input, setInput]           = useState('')
-  const [results, setResults]       = useState([])
-  const [open, setOpen]             = useState(false)
-  const [loading, setLoading]       = useState(false)
+  const [input, setInput]             = useState('')
+  const [results, setResults]         = useState([])
+  const [open, setOpen]               = useState(false)
+  const [loading, setLoading]         = useState(false)
   const [highlighted, setHighlighted] = useState(0)
   const debounceRef = useRef(null)
   const wrapperRef  = useRef(null)
@@ -54,42 +63,43 @@ export default function SearchBar({ onSelect }) {
 
   return (
     <div ref={wrapperRef} style={{ position: 'relative' }}>
-      {/* Pill-shaped search input */}
+      {/* Search input */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
-        background: 'rgba(255,255,255,0.04)',
-        border: `1px solid ${BORDER}`,
-        borderRadius: 9999,
-        height: 36,
-        padding: '0 6px 0 18px',
+        background: 'transparent',
+        border: `1px solid ${C.border}`,
+        height: 34,
+        padding: '0 6px 0 14px',
         transition: 'border-color 0.2s',
         minWidth: 240,
       }}>
-        <span style={{ color: 'rgba(255,255,255,0.2)', marginRight: 8, fontSize: 14 }}>⌕</span>
+        <span style={{ color: C.muted, marginRight: 8, fontSize: 13 }}>⌕</span>
         <input
           value={input}
           onChange={handleInput}
           onKeyDown={handleKeyDown}
-          onFocus={() => results.length > 0 && setOpen(true)}
+          onFocus={e => { e.currentTarget.parentElement.style.borderColor = 'rgba(201,169,110,0.5)'; results.length > 0 && setOpen(true) }}
+          onBlur={e => e.currentTarget.parentElement.style.borderColor = C.border}
           placeholder="Search symbol or company..."
           style={{
             flex: 1,
             background: 'transparent',
             border: 'none',
             outline: 'none',
-            color: 'rgba(255,255,255,0.87)',
-            fontFamily: MONO,
+            color: C.parchment,
+            fontFamily: F.mono,
             fontSize: 11,
             letterSpacing: '0.04em',
           }}
         />
         {loading && (
           <div style={{
-            width: 14, height: 14, borderRadius: '50%',
-            border: '2px solid rgba(155,81,224,0.2)',
-            borderTopColor: '#9b51e0',
-            marginRight: 10,
+            width: 12,
+            height: 12,
+            border: `1px solid ${C.border}`,
+            borderTopColor: C.gold,
+            marginRight: 8,
             animation: 'spin 0.7s linear infinite',
           }} />
         )}
@@ -99,17 +109,14 @@ export default function SearchBar({ onSelect }) {
       {open && results.length > 0 && (
         <div style={{
           position: 'absolute',
-          top: 'calc(100% + 8px)',
+          top: 'calc(100% + 6px)',
           left: 0,
           right: 0,
-          background: '#0d0d1a',
-          border: '1px solid rgba(255,255,255,0.09)',
-          borderRadius: 16,
+          background: C.nav,
+          border: `1px solid ${C.border}`,
           zIndex: 1000,
           maxHeight: 340,
           overflowY: 'auto',
-          boxShadow: '0 16px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(155,81,224,0.12)',
-          padding: '6px',
         }}>
           {results.map((item, i) => (
             <div
@@ -121,26 +128,28 @@ export default function SearchBar({ onSelect }) {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '10px 14px',
-                borderRadius: 10,
                 cursor: 'pointer',
-                background: highlighted === i ? 'rgba(155,81,224,0.1)' : 'transparent',
-                transition: 'background 0.12s',
+                background: highlighted === i ? 'rgba(201,169,110,0.07)' : 'transparent',
+                borderBottom: `1px solid rgba(201,169,110,0.08)`,
+                transition: 'background 0.1s',
               }}
             >
               <div>
                 <div style={{
-                  fontFamily: MONO, fontSize: 12, fontWeight: 600, letterSpacing: '0.06em',
-                  ...(highlighted === i
-                    ? { background: GRAD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }
-                    : { color: 'rgba(255,255,255,0.7)' }),
+                  fontFamily: F.mono,
+                  fontSize: 12,
+                  fontWeight: 600,
+                  letterSpacing: '0.06em',
+                  color: highlighted === i ? C.gold : C.parchment,
+                  transition: 'color 0.1s',
                 }}>
                   {item.symbol}
                 </div>
-                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: 'rgba(255,255,255,0.3)', marginTop: 2 }}>
+                <div style={{ fontFamily: F.label, fontSize: 10, letterSpacing: '0.04em', color: C.muted, marginTop: 2 }}>
                   {item.name}
                 </div>
               </div>
-              <div style={{ fontFamily: MONO, fontSize: 9, color: 'rgba(255,255,255,0.15)', letterSpacing: '0.08em' }}>
+              <div style={{ fontFamily: F.label, fontSize: 8, color: C.muted, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
                 {item.exchange} · {item.type}
               </div>
             </div>
