@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AlphaQuant — Design Options</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #060810;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      padding: 48px 32px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .subtitle {
+      text-align: center;
+      color: #4a5568;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 56px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .option-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .option-label .badge {
+      font-size: 18px;
+    }
+    .option-label .name {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .option-label .desc {
+      font-size: 12px;
+      color: #4a5568;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .mockup {
+      border-radius: 12px;
+      overflow: hidden;
+      width: 100%;
+      height: 400px;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .mockup:hover { transform: translateY(-4px); }
+
+    /* ─── OPTION 1: Polish Current (Dark Navy) ─── */
+    .opt1 {
+      background: #0B0F1A;
+      border: 1px solid #151C2C;
+      box-shadow: 0 8px 40px rgba(78,234,255,0.08);
+    }
+    .opt1:hover { box-shadow: 0 16px 60px rgba(78,234,255,0.18); }
+    .opt1 .nav {
+      background: #0D1220;
+      border-bottom: 1px solid #151C2C;
+      padding: 0 20px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .opt1 .logo { font-size: 12px; font-weight: 800; letter-spacing: 0.15em; color: #fff; }
+    .opt1 .logo span { color: #4EEAFF; }
+    .opt1 .nav-tabs { display: flex; gap: 0; }
+    .opt1 .nav-tab {
+      font-size: 8px; font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #3A4A6B; padding: 0 10px; height: 42px;
+      display: flex; align-items: center; border-bottom: 2px solid transparent;
+    }
+    .opt1 .nav-tab.active { color: #4EEAFF; border-bottom-color: #4EEAFF; }
+    .opt1 .quote-strip {
+      background: #0B0F1A; border-bottom: 1px solid #151C2C;
+      padding: 0 20px; height: 50px; display: flex; align-items: center; gap: 20px;
+    }
+    .opt1 .price { font-family: 'JetBrains Mono', monospace; font-size: 18px; color: #fff; }
+    .opt1 .change { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4EEAFF; }
+    .opt1 .stat { border-left: 1px solid #151C2C; padding-left: 14px; }
+    .opt1 .stat-label { font-size: 7px; color: #3A4A6B; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'JetBrains Mono', monospace; }
+    .opt1 .stat-value { font-size: 10px; color: #CBD5E1; font-family: 'JetBrains Mono', monospace; }
+    .opt1 .body { display: flex; flex: 1; height: calc(400px - 92px); }
+    .opt1 .main { flex: 1; padding: 14px 20px; }
+    .opt1 .chart-area {
+      background: #0D1220; border: 1px solid #151C2C; border-radius: 6px;
+      height: 160px; position: relative; overflow: hidden;
+    }
+    .opt1 .chart-label { font-size: 7px; color: #3A4A6B; font-family: 'JetBrains Mono', monospace; padding: 8px 10px; text-transform: uppercase; letter-spacing: 0.1em; }
+    .opt1 .candles { position: absolute; bottom: 0; left: 0; right: 0; height: 130px; }
+    .opt1 .sidebar {
+      width: 130px; border-left: 1px solid #151C2C;
+      background: #0D1220; padding: 10px;
+    }
+    .opt1 .sidebar-title { font-size: 7px; color: #3A4A6B; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'JetBrains Mono', monospace; margin-bottom: 10px; }
+    .opt1 .watch-item { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #0F1525; }
+    .opt1 .watch-sym { font-size: 9px; font-weight: 600; color: #CBD5E1; font-family: 'JetBrains Mono', monospace; }
+    .opt1 .watch-price { font-size: 8px; color: #4EEAFF; font-family: 'JetBrains Mono', monospace; }
+    .opt1 .indicator-row { display: flex; gap: 4px; margin-bottom: 12px; flex-wrap: wrap; }
+    .opt1 .ind-btn {
+      font-size: 7px; font-family: 'JetBrains Mono', monospace;
+      padding: 2px 8px; border: 1px solid #4EEAFF; color: #4EEAFF;
+      background: rgba(78,234,255,0.08); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .opt1 .ind-btn.off { border-color: #1E2840; color: #3A4A6B; background: transparent; }
+    .opt1 .mini-chart { background: #0D1220; border: 1px solid #151C2C; border-radius: 4px; height: 50px; margin-top: 8px; }
+
+    /* ─── OPTION 2: Glassmorphism ─── */
+    .opt2 {
+      background: linear-gradient(135deg, #0a0a1a 0%, #0d1033 50%, #0a0a1a 100%);
+      border: 1px solid rgba(120,80,255,0.3);
+      box-shadow: 0 8px 40px rgba(120,80,255,0.15);
+    }
+    .opt2:hover { box-shadow: 0 16px 60px rgba(120,80,255,0.3); }
+    .opt2 .nav {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 0 20px; height: 42px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .opt2 .logo { font-size: 12px; font-weight: 800; letter-spacing: 0.15em; color: #fff; }
+    .opt2 .logo span { background: linear-gradient(90deg, #a78bfa, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .opt2 .nav-tabs { display: flex; gap: 0; }
+    .opt2 .nav-tab { font-size: 8px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.25); padding: 0 10px; height: 42px; display: flex; align-items: center; }
+    .opt2 .nav-tab.active { color: #a78bfa; }
+    .opt2 .glass-card {
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+    }
+    .opt2 .quote-strip {
+      padding: 0 20px; height: 50px; display: flex; align-items: center; gap: 16px;
+      background: rgba(167,139,250,0.06); border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .opt2 .price { font-family: 'JetBrains Mono', monospace; font-size: 18px; color: #fff; }
+    .opt2 .change { font-size: 10px; color: #4ade80; font-family: 'JetBrains Mono', monospace; }
+    .opt2 .body { display: flex; flex: 1; height: calc(400px - 92px); padding: 12px; gap: 10px; }
+    .opt2 .main { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .opt2 .chart-area {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(167,139,250,0.2);
+      border-radius: 10px; flex: 1; position: relative; overflow: hidden;
+    }
+    .opt2 .glow-line {
+      position: absolute; bottom: 30%; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, #a78bfa, #60a5fa, transparent);
+      box-shadow: 0 0 20px rgba(167,139,250,0.5);
+    }
+    .opt2 .glow-dot {
+      position: absolute; right: 60px; bottom: calc(30% - 3px);
+      width: 6px; height: 6px; border-radius: 50%; background: #a78bfa;
+      box-shadow: 0 0 12px rgba(167,139,250,0.8);
+    }
+    .opt2 .chart-label { font-size: 8px; color: rgba(167,139,250,0.7); font-family: 'JetBrains Mono', monospace; padding: 8px 10px; text-transform: uppercase; letter-spacing: 0.1em; }
+    .opt2 .sidebar {
+      width: 130px; display: flex; flex-direction: column; gap: 8px;
+    }
+    .opt2 .watch-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px; padding: 8px;
+    }
+    .opt2 .watch-title { font-size: 7px; color: rgba(167,139,250,0.6); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; font-family: 'JetBrains Mono', monospace; }
+    .opt2 .watch-item { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .opt2 .watch-sym { font-size: 9px; font-weight: 600; color: rgba(255,255,255,0.7); }
+    .opt2 .watch-price { font-size: 8px; color: #4ade80; font-family: 'JetBrains Mono', monospace; }
+    .opt2 .stat-pill {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px; padding: 6px 10px;
+    }
+    .opt2 .stat-label { font-size: 7px; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.1em; font-family: 'JetBrains Mono', monospace; }
+    .opt2 .stat-value { font-size: 11px; color: #fff; font-family: 'JetBrains Mono', monospace; margin-top: 2px; }
+    .opt2 .floating-badge {
+      position: absolute; top: 10px; right: 10px;
+      background: rgba(167,139,250,0.15); border: 1px solid rgba(167,139,250,0.3);
+      border-radius: 20px; padding: 3px 10px;
+      font-size: 8px; color: #a78bfa; font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ─── OPTION 3: Premium Dark ─── */
+    .opt3 {
+      background: #080C12;
+      border: 1px solid #1a2235;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    }
+    .opt3:hover { box-shadow: 0 16px 60px rgba(255,179,0,0.12); }
+    .opt3 .nav {
+      background: linear-gradient(90deg, #0A0E18, #0D1220);
+      border-bottom: 1px solid #1a2235;
+      padding: 0 20px; height: 42px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .opt3 .logo { font-size: 12px; font-weight: 800; letter-spacing: 0.15em; color: #fff; }
+    .opt3 .logo span { color: #FFB300; }
+    .opt3 .nav-tabs { display: flex; gap: 0; }
+    .opt3 .nav-tab { font-size: 8px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: #2d3d5a; padding: 0 10px; height: 42px; display: flex; align-items: center; border-bottom: 2px solid transparent; }
+    .opt3 .nav-tab.active { color: #FFB300; border-bottom-color: #FFB300; }
+    .opt3 .quote-strip {
+      background: linear-gradient(90deg, #0A0E18, #0C1118);
+      border-bottom: 1px solid #1a2235;
+      padding: 0 20px; height: 50px; display: flex; align-items: center; gap: 20px;
+    }
+    .opt3 .price { font-family: 'JetBrains Mono', monospace; font-size: 20px; color: #fff; font-weight: 500; }
+    .opt3 .change { font-size: 10px; color: #4ade80; font-family: 'JetBrains Mono', monospace; }
+    .opt3 .body { display: flex; flex: 1; height: calc(400px - 92px); }
+    .opt3 .main { flex: 1; padding: 14px 20px; }
+    .opt3 .chart-area {
+      background: #0A0E18; border: 1px solid #1a2235; border-radius: 8px;
+      height: 155px; position: relative; overflow: hidden;
+    }
+    .opt3 .chart-label { font-size: 7px; color: #2d3d5a; font-family: 'JetBrains Mono', monospace; padding: 8px 10px; text-transform: uppercase; letter-spacing: 0.1em; }
+    .opt3 .golden-glow {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 60px;
+      background: linear-gradient(180deg, transparent, rgba(255,179,0,0.05));
+    }
+    .opt3 .sidebar {
+      width: 130px; border-left: 1px solid #1a2235;
+      background: #080C12; padding: 12px;
+    }
+    .opt3 .sidebar-title { font-size: 7px; color: #2d3d5a; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'JetBrains Mono', monospace; margin-bottom: 10px; }
+    .opt3 .watch-item { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid #0F1525; align-items: center; }
+    .opt3 .watch-sym { font-size: 9px; font-weight: 700; color: #fff; }
+    .opt3 .watch-price { font-size: 8px; font-family: 'JetBrains Mono', monospace; }
+    .opt3 .up { color: #4ade80; }
+    .opt3 .down { color: #f87171; }
+    .opt3 .premium-badge {
+      background: linear-gradient(135deg, #FFB300, #FF6B00);
+      border-radius: 3px; padding: 1px 5px;
+      font-size: 6px; color: #000; font-weight: 700; letter-spacing: 0.05em;
+    }
+    .opt3 .stat { border-left: 1px solid #1a2235; padding-left: 14px; }
+    .opt3 .stat-label { font-size: 7px; color: #2d3d5a; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'JetBrains Mono', monospace; }
+    .opt3 .stat-value { font-size: 10px; color: #CBD5E1; font-family: 'JetBrains Mono', monospace; }
+    .opt3 .stat-value.gold { color: #FFB300; }
+    .opt3 .mini-chart { background: #0A0E18; border: 1px solid #1a2235; border-radius: 4px; height: 50px; margin-top: 10px; position: relative; overflow: hidden; }
+
+    /* ─── OPTION 4: Light Mode ─── */
+    .opt4 {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    }
+    .opt4:hover { box-shadow: 0 16px 60px rgba(59,130,246,0.15); }
+    .opt4 .nav {
+      background: #fff; border-bottom: 1px solid #E2E8F0;
+      padding: 0 20px; height: 42px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .opt4 .logo { font-size: 12px; font-weight: 800; letter-spacing: 0.15em; color: #1E293B; }
+    .opt4 .logo span { color: #3B82F6; }
+    .opt4 .nav-tabs { display: flex; gap: 0; }
+    .opt4 .nav-tab { font-size: 8px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: #94A3B8; padding: 0 10px; height: 42px; display: flex; align-items: center; border-bottom: 2px solid transparent; }
+    .opt4 .nav-tab.active { color: #3B82F6; border-bottom-color: #3B82F6; }
+    .opt4 .quote-strip {
+      background: #fff; border-bottom: 1px solid #E2E8F0;
+      padding: 0 20px; height: 50px; display: flex; align-items: center; gap: 20px;
+    }
+    .opt4 .price { font-family: 'JetBrains Mono', monospace; font-size: 18px; color: #1E293B; font-weight: 600; }
+    .opt4 .change { font-size: 10px; color: #16a34a; font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+    .opt4 .body { display: flex; flex: 1; height: calc(400px - 92px); }
+    .opt4 .main { flex: 1; padding: 14px 20px; background: #F8FAFC; }
+    .opt4 .chart-area {
+      background: #fff; border: 1px solid #E2E8F0; border-radius: 8px;
+      height: 160px; position: relative; overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .opt4 .chart-label { font-size: 7px; color: #94A3B8; font-family: 'JetBrains Mono', monospace; padding: 8px 10px; text-transform: uppercase; letter-spacing: 0.1em; }
+    .opt4 .sidebar {
+      width: 130px; border-left: 1px solid #E2E8F0;
+      background: #fff; padding: 12px;
+    }
+    .opt4 .sidebar-title { font-size: 7px; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'JetBrains Mono', monospace; margin-bottom: 10px; }
+    .opt4 .watch-item { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #F1F5F9; align-items: center; }
+    .opt4 .watch-sym { font-size: 9px; font-weight: 700; color: #1E293B; }
+    .opt4 .watch-price { font-size: 8px; font-family: 'JetBrains Mono', monospace; }
+    .opt4 .up { color: #16a34a; }
+    .opt4 .down { color: #dc2626; }
+    .opt4 .stat { border-left: 1px solid #E2E8F0; padding-left: 14px; }
+    .opt4 .stat-label { font-size: 7px; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.1em; font-family: 'JetBrains Mono', monospace; }
+    .opt4 .stat-value { font-size: 10px; color: #1E293B; font-family: 'JetBrains Mono', monospace; }
+    .opt4 .stat-value.blue { color: #3B82F6; }
+    .opt4 .mini-chart { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; height: 50px; margin-top: 8px; position: relative; overflow: hidden; }
+    .opt4 .ind-btn {
+      font-size: 7px; font-family: 'JetBrains Mono', monospace;
+      padding: 2px 8px; border: 1px solid #3B82F6; color: #3B82F6;
+      background: rgba(59,130,246,0.08); text-transform: uppercase; letter-spacing: 0.08em; border-radius: 3px;
+    }
+    .opt4 .indicator-row { display: flex; gap: 4px; margin-bottom: 10px; }
+
+    /* shared candle SVG charts */
+    .chart-svg { width: 100%; height: 100%; }
+
+    /* PICK button */
+    .pick-btn {
+      display: block; width: 100%; padding: 10px;
+      text-align: center; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      border: none; border-radius: 8px; cursor: pointer;
+      transition: all 0.2s; font-family: 'JetBrains Mono', monospace;
+    }
+    .pick-btn-1 { background: rgba(78,234,255,0.1); color: #4EEAFF; border: 1px solid rgba(78,234,255,0.3); }
+    .pick-btn-1:hover { background: rgba(78,234,255,0.2); }
+    .pick-btn-2 { background: rgba(167,139,250,0.1); color: #a78bfa; border: 1px solid rgba(167,139,250,0.3); }
+    .pick-btn-2:hover { background: rgba(167,139,250,0.2); }
+    .pick-btn-3 { background: rgba(255,179,0,0.1); color: #FFB300; border: 1px solid rgba(255,179,0,0.3); }
+    .pick-btn-3:hover { background: rgba(255,179,0,0.2); }
+    .pick-btn-4 { background: rgba(59,130,246,0.1); color: #3B82F6; border: 1px solid rgba(59,130,246,0.3); }
+    .pick-btn-4:hover { background: rgba(59,130,246,0.2); }
+
+    .footer { text-align: center; margin-top: 40px; color: #1e2840; font-size: 11px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; }
+  </style>
+</head>
+<body>
+
+  <h1>AlphaQuant — Design Options</h1>
+  <p class="subtitle">Click any option to select it · Hover to preview</p>
+
+  <div class="grid">
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- OPTION 1: Polish Current -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="option-wrapper">
+      <div class="option-label">
+        <span class="badge">✨</span>
+        <div>
+          <div class="name" style="color:#4EEAFF;">Polish Current</div>
+          <div class="desc">Refined dark navy · Better spacing · Cards</div>
+        </div>
+      </div>
+
+      <div class="mockup opt1">
+        <!-- Nav -->
+        <div class="opt1 nav">
+          <div style="display:flex;align-items:center;gap:20px">
+            <div class="opt1 logo">Alpha<span>Quant</span></div>
+            <div class="opt1 nav-tabs">
+              <div class="opt1 nav-tab active">Chart</div>
+              <div class="opt1 nav-tab">Screener</div>
+              <div class="opt1 nav-tab">Backtester</div>
+            </div>
+          </div>
+          <div style="background:#0D1220;border:1px solid #1E2840;padding:4px 12px;font-size:8px;color:#3A4A6B;font-family:'JetBrains Mono',monospace;">⌕ Search symbol</div>
+        </div>
+        <!-- Quote Strip -->
+        <div class="opt1 quote-strip">
+          <div>
+            <div class="opt1 price">$189.45</div>
+            <div style="font-size:7px;color:#3A4A6B;font-family:'JetBrains Mono',monospace;margin-top:2px">AAPL — Apple Inc.</div>
+          </div>
+          <div class="opt1 change">+2.34 (+1.25%)</div>
+          <div class="opt1 stat"><div class="opt1 stat-label">Mkt Cap</div><div class="opt1 stat-value">$2.9T</div></div>
+          <div class="opt1 stat"><div class="opt1 stat-label">P/E</div><div class="opt1 stat-value">31.2</div></div>
+          <div class="opt1 stat"><div class="opt1 stat-label">Volume</div><div class="opt1 stat-value">58.4M</div></div>
+          <div class="opt1 stat"><div class="opt1 stat-label">52W H</div><div class="opt1 stat-value" style="color:#4EEAFF">$199.6</div></div>
+        </div>
+        <!-- Body -->
+        <div class="opt1 body">
+          <div class="opt1 main">
+            <div class="opt1 indicator-row">
+              <div class="opt1 ind-btn">BB</div>
+              <div class="opt1 ind-btn">RSI</div>
+              <div class="opt1 ind-btn">MACD</div>
+              <div class="opt1 ind-btn off">VOL</div>
+            </div>
+            <div class="opt1 chart-area">
+              <div class="opt1 chart-label">AAPL · OHLCV · Bollinger Bands (20,2)</div>
+              <svg class="chart-svg" viewBox="0 0 400 120" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#4EEAFF" stop-opacity="0.15"/>
+                    <stop offset="100%" stop-color="#4EEAFF" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <polyline points="0,80 30,75 50,60 70,65 90,50 110,55 130,40 150,45 170,35 190,42 210,30 230,38 250,25 270,32 290,20 310,28 330,18 350,22 380,15 400,18" fill="none" stroke="#4EEAFF" stroke-width="1.5"/>
+                <polygon points="0,80 30,75 50,60 70,65 90,50 110,55 130,40 150,45 170,35 190,42 210,30 230,38 250,25 270,32 290,20 310,28 330,18 350,22 380,15 400,18 400,120 0,120" fill="url(#g1)"/>
+                <polyline points="0,90 30,85 50,72 70,78 90,62 110,68 130,54 150,58 170,48 190,55 210,43 230,50 250,38 270,44 290,33 310,40 330,30 350,35 380,28 400,30" fill="none" stroke="#1E2840" stroke-width="1" stroke-dasharray="3,3"/>
+                <polyline points="0,70 30,65 50,50 70,54 90,40 110,44 130,28 150,34 170,24 190,30 210,19 230,27 250,14 270,21 290,9 310,17 330,8 350,12 380,5 400,8" fill="none" stroke="#1E2840" stroke-width="1" stroke-dasharray="3,3"/>
+                <!-- Candles -->
+                <rect x="28" y="62" width="5" height="18" fill="#ff5c7a"/>
+                <line x1="30.5" y1="58" x2="30.5" y2="82" stroke="#ff5c7a" stroke-width="1"/>
+                <rect x="48" y="48" width="5" height="15" fill="#4EEAFF"/>
+                <line x1="50.5" y1="44" x2="50.5" y2="68" stroke="#4EEAFF" stroke-width="1"/>
+                <rect x="88" y="38" width="5" height="16" fill="#4EEAFF"/>
+                <line x1="90.5" y1="34" x2="90.5" y2="58" stroke="#4EEAFF" stroke-width="1"/>
+                <rect x="128" y="30" width="5" height="14" fill="#ff5c7a"/>
+                <line x1="130.5" y1="26" x2="130.5" y2="48" stroke="#ff5c7a" stroke-width="1"/>
+                <rect x="168" y="24" width="5" height="14" fill="#4EEAFF"/>
+                <line x1="170.5" y1="20" x2="170.5" y2="42" stroke="#4EEAFF" stroke-width="1"/>
+                <rect x="208" y="18" width="5" height="15" fill="#4EEAFF"/>
+                <rect x="248" y="12" width="5" height="16" fill="#ff5c7a"/>
+                <rect x="288" y="8" width="5" height="15" fill="#4EEAFF"/>
+                <rect x="328" y="6" width="5" height="16" fill="#4EEAFF"/>
+              </svg>
+            </div>
+            <div class="opt1 mini-chart">
+              <svg width="100%" height="100%" viewBox="0 0 400 50" preserveAspectRatio="none">
+                <polyline points="0,35 40,30 80,38 120,25 160,28 200,20 240,22 280,15 320,18 360,12 400,14" fill="none" stroke="#00C49F" stroke-width="1.5"/>
+                <line x1="0" y1="10" x2="400" y2="10" stroke="#1E2840" stroke-width="0.5" stroke-dasharray="4,4"/>
+                <line x1="0" y1="40" x2="400" y2="40" stroke="#1E2840" stroke-width="0.5" stroke-dasharray="4,4"/>
+              </svg>
+            </div>
+          </div>
+          <div class="opt1 sidebar">
+            <div class="opt1 sidebar-title">Watchlist</div>
+            <div class="opt1 watch-item"><span class="opt1 watch-sym">AAPL</span><span class="opt1 watch-price">+1.2%</span></div>
+            <div class="opt1 watch-item"><span class="opt1 watch-sym">TSLA</span><span class="opt1 watch-price" style="color:#FF5C7A">-0.8%</span></div>
+            <div class="opt1 watch-item"><span class="opt1 watch-sym">MSFT</span><span class="opt1 watch-price">+0.5%</span></div>
+            <div class="opt1 watch-item"><span class="opt1 watch-sym">NVDA</span><span class="opt1 watch-price">+3.1%</span></div>
+            <div class="opt1 watch-item"><span class="opt1 watch-sym">AMZN</span><span class="opt1 watch-price" style="color:#FF5C7A">-0.3%</span></div>
+          </div>
+        </div>
+      </div>
+      <button class="pick-btn pick-btn-1" onclick="alert('Great choice! Tell Claude: I want Option 1 — Polish Current')">✨ Choose This Design</button>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- OPTION 2: Glassmorphism -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="option-wrapper">
+      <div class="option-label">
+        <span class="badge">🌊</span>
+        <div>
+          <div class="name" style="color:#a78bfa;">Glassmorphism</div>
+          <div class="desc">Frosted glass · Purple-blue gradient · Glow effects</div>
+        </div>
+      </div>
+
+      <div class="mockup opt2">
+        <!-- Nav -->
+        <div class="opt2 nav">
+          <div style="display:flex;align-items:center;gap:20px">
+            <div class="opt2 logo">Alpha<span>Quant</span></div>
+            <div class="opt2 nav-tabs">
+              <div class="opt2 nav-tab active">Chart</div>
+              <div class="opt2 nav-tab">Screener</div>
+              <div class="opt2 nav-tab">Backtester</div>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(10px);padding:4px 12px;font-size:8px;color:rgba(255,255,255,0.25);font-family:'JetBrains Mono',monospace;border-radius:20px;">⌕ Search symbol</div>
+        </div>
+        <!-- Quote Strip -->
+        <div class="opt2 quote-strip">
+          <div>
+            <div class="opt2 price">$189.45</div>
+            <div style="font-size:7px;color:rgba(167,139,250,0.5);font-family:'JetBrains Mono',monospace;margin-top:2px">AAPL — Apple Inc.</div>
+          </div>
+          <div class="opt2 change">+2.34 (+1.25%)</div>
+          <div style="border-left:1px solid rgba(255,255,255,0.06);padding-left:14px">
+            <div style="font-size:7px;color:rgba(255,255,255,0.2);text-transform:uppercase;letter-spacing:0.1em;font-family:'JetBrains Mono',monospace;">Mkt Cap</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.7);font-family:'JetBrains Mono',monospace;">$2.9T</div>
+          </div>
+          <div style="border-left:1px solid rgba(255,255,255,0.06);padding-left:14px">
+            <div style="font-size:7px;color:rgba(255,255,255,0.2);text-transform:uppercase;letter-spacing:0.1em;font-family:'JetBrains Mono',monospace;">52W High</div>
+            <div style="font-size:10px;color:#a78bfa;font-family:'JetBrains Mono',monospace;">$199.6</div>
+          </div>
+        </div>
+        <!-- Body -->
+        <div class="opt2 body">
+          <div class="opt2 main">
+            <div class="opt2 chart-area">
+              <div class="opt2 chart-label">AAPL · Candlestick</div>
+              <div class="opt2 floating-badge">LIVE</div>
+              <div class="opt2 glow-line"></div>
+              <div class="opt2 glow-dot"></div>
+              <svg width="100%" height="100%" viewBox="0 0 400 130" preserveAspectRatio="none" style="position:absolute;top:0;left:0">
+                <defs>
+                  <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.25"/>
+                    <stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <polygon points="0,100 40,90 80,75 120,85 160,60 200,55 240,40 280,45 320,30 360,22 400,18 400,130 0,130" fill="url(#g2)"/>
+                <polyline points="0,100 40,90 80,75 120,85 160,60 200,55 240,40 280,45 320,30 360,22 400,18" fill="none" stroke="#a78bfa" stroke-width="1.5"/>
+                <!-- Candles with glow -->
+                <rect x="38" y="74" width="5" height="18" fill="#f472b6" opacity="0.9"/>
+                <rect x="78" y="62" width="5" height="16" fill="#4ade80" opacity="0.9"/>
+                <rect x="118" y="72" width="5" height="16" fill="#f472b6" opacity="0.9"/>
+                <rect x="158" y="48" width="5" height="16" fill="#4ade80" opacity="0.9"/>
+                <rect x="198" y="43" width="5" height="15" fill="#4ade80" opacity="0.9"/>
+                <rect x="238" y="30" width="5" height="14" fill="#4ade80" opacity="0.9"/>
+                <rect x="278" y="35" width="5" height="14" fill="#f472b6" opacity="0.9"/>
+                <rect x="318" y="20" width="5" height="14" fill="#4ade80" opacity="0.9"/>
+              </svg>
+            </div>
+          </div>
+          <div class="opt2 sidebar">
+            <div class="opt2 watch-card">
+              <div class="opt2 watch-title">Watchlist</div>
+              <div class="opt2 watch-item"><span class="opt2 watch-sym" style="color:rgba(255,255,255,0.7)">AAPL</span><span class="opt2 watch-price">+1.2%</span></div>
+              <div class="opt2 watch-item"><span class="opt2 watch-sym" style="color:rgba(255,255,255,0.7)">TSLA</span><span class="opt2 watch-price" style="color:#f87171">-0.8%</span></div>
+              <div class="opt2 watch-item"><span class="opt2 watch-sym" style="color:rgba(255,255,255,0.7)">MSFT</span><span class="opt2 watch-price">+0.5%</span></div>
+              <div class="opt2 watch-item"><span class="opt2 watch-sym" style="color:rgba(255,255,255,0.7)">NVDA</span><span class="opt2 watch-price">+3.1%</span></div>
+            </div>
+            <div class="opt2 stat-pill">
+              <div class="opt2 stat-label">RSI · 14</div>
+              <div class="opt2 stat-value" style="color:#a78bfa">63.4</div>
+            </div>
+            <div class="opt2 stat-pill">
+              <div class="opt2 stat-label">Volume</div>
+              <div class="opt2 stat-value">58.4M</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="pick-btn pick-btn-2" onclick="alert('Great choice! Tell Claude: I want Option 2 — Glassmorphism')">🌊 Choose This Design</button>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- OPTION 3: Premium Dark -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="option-wrapper">
+      <div class="option-label">
+        <span class="badge">💎</span>
+        <div>
+          <div class="name" style="color:#FFB300;">Premium Dark</div>
+          <div class="desc">Gold accents · Rich gradients · Pro trading feel</div>
+        </div>
+      </div>
+
+      <div class="mockup opt3">
+        <!-- Nav -->
+        <div class="opt3 nav">
+          <div style="display:flex;align-items:center;gap:20px">
+            <div class="opt3 logo">Alpha<span>Quant</span></div>
+            <div class="opt3 nav-tabs">
+              <div class="opt3 nav-tab active">Chart</div>
+              <div class="opt3 nav-tab">Screener</div>
+              <div class="opt3 nav-tab">Backtester</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="background:#0A0E18;border:1px solid #1a2235;padding:4px 12px;font-size:8px;color:#2d3d5a;font-family:'JetBrains Mono',monospace;">⌕ Search symbol</div>
+            <div class="opt3 premium-badge">PRO</div>
+          </div>
+        </div>
+        <!-- Quote Strip -->
+        <div class="opt3 quote-strip">
+          <div>
+            <div class="opt3 price">$189.45</div>
+            <div style="font-size:7px;color:#2d3d5a;font-family:'JetBrains Mono',monospace;margin-top:2px">AAPL — Apple Inc.</div>
+          </div>
+          <div class="opt3 change">+2.34 (+1.25%)</div>
+          <div class="opt3 stat"><div class="opt3 stat-label">Mkt Cap</div><div class="opt3 stat-value">$2.9T</div></div>
+          <div class="opt3 stat"><div class="opt3 stat-label">P/E</div><div class="opt3 stat-value">31.2</div></div>
+          <div class="opt3 stat"><div class="opt3 stat-label">52W High</div><div class="opt3 stat-value gold">$199.6</div></div>
+          <div class="opt3 stat"><div class="opt3 stat-label">52W Low</div><div class="opt3 stat-value down">$124.2</div></div>
+        </div>
+        <!-- Body -->
+        <div class="opt3 body">
+          <div class="opt3 main">
+            <div style="display:flex;gap:4px;margin-bottom:10px">
+              <div style="font-size:7px;font-family:'JetBrains Mono',monospace;padding:2px 8px;border:1px solid #FFB300;color:#FFB300;background:rgba(255,179,0,0.08);text-transform:uppercase;letter-spacing:0.08em;">BB</div>
+              <div style="font-size:7px;font-family:'JetBrains Mono',monospace;padding:2px 8px;border:1px solid #FFB300;color:#FFB300;background:rgba(255,179,0,0.08);text-transform:uppercase;letter-spacing:0.08em;">RSI</div>
+              <div style="font-size:7px;font-family:'JetBrains Mono',monospace;padding:2px 8px;border:1px solid #1a2235;color:#2d3d5a;background:transparent;text-transform:uppercase;letter-spacing:0.08em;">MACD</div>
+            </div>
+            <div class="opt3 chart-area">
+              <div class="opt3 chart-label">AAPL · OHLCV</div>
+              <div class="opt3 golden-glow"></div>
+              <svg width="100%" height="100%" viewBox="0 0 400 130" preserveAspectRatio="none" style="position:absolute;top:0;left:0">
+                <defs>
+                  <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#FFB300" stop-opacity="0.15"/>
+                    <stop offset="100%" stop-color="#FFB300" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <polygon points="0,100 40,88 80,78 120,86 160,65 200,58 240,44 280,50 320,35 360,28 400,20 400,130 0,130" fill="url(#g3)"/>
+                <polyline points="0,100 40,88 80,78 120,86 160,65 200,58 240,44 280,50 320,35 360,28 400,20" fill="none" stroke="#FFB300" stroke-width="1.5"/>
+                <!-- Golden candles -->
+                <rect x="38" y="76" width="5" height="16" fill="#f87171"/>
+                <line x1="40.5" y1="72" x2="40.5" y2="96" stroke="#f87171" stroke-width="1"/>
+                <rect x="78" y="65" width="5" height="15" fill="#4ade80"/>
+                <line x1="80.5" y1="61" x2="80.5" y2="83" stroke="#4ade80" stroke-width="1"/>
+                <rect x="118" y="73" width="5" height="16" fill="#f87171"/>
+                <rect x="158" y="52" width="5" height="16" fill="#4ade80"/>
+                <rect x="198" y="46" width="5" height="15" fill="#4ade80"/>
+                <rect x="238" y="34" width="5" height="14" fill="#4ade80"/>
+                <rect x="278" y="40" width="5" height="14" fill="#f87171"/>
+                <rect x="318" y="26" width="5" height="14" fill="#4ade80"/>
+                <rect x="358" y="18" width="5" height="13" fill="#4ade80"/>
+                <!-- BB lines -->
+                <polyline points="0,115 40,105 80,95 120,103 160,82 200,75 240,62 280,68 320,54 360,47 400,40" fill="none" stroke="#1a2235" stroke-width="1" stroke-dasharray="4,4"/>
+                <polyline points="0,85 40,72 80,62 120,70 160,48 200,42 240,28 280,34 320,20 360,12 400,5" fill="none" stroke="#1a2235" stroke-width="1" stroke-dasharray="4,4"/>
+              </svg>
+            </div>
+            <div class="opt3 mini-chart">
+              <svg width="100%" height="100%" viewBox="0 0 400 50" preserveAspectRatio="none">
+                <line x1="0" y1="20" x2="400" y2="20" stroke="#1a2235" stroke-width="0.5" stroke-dasharray="4,4"/>
+                <line x1="0" y1="38" x2="400" y2="38" stroke="#1a2235" stroke-width="0.5" stroke-dasharray="4,4"/>
+                <polyline points="0,35 40,30 80,38 120,25 160,28 200,20 240,22 280,15 320,18 360,12 400,14" fill="none" stroke="#FFB300" stroke-width="1.5"/>
+              </svg>
+            </div>
+          </div>
+          <div class="opt3 sidebar">
+            <div class="opt3 sidebar-title">Watchlist</div>
+            <div class="opt3 watch-item">
+              <span class="opt3 watch-sym">AAPL</span>
+              <span class="opt3 watch-price up" style="font-size:8px;font-family:'JetBrains Mono',monospace;">+1.2%</span>
+            </div>
+            <div class="opt3 watch-item">
+              <span class="opt3 watch-sym">TSLA</span>
+              <span class="opt3 watch-price down" style="font-size:8px;font-family:'JetBrains Mono',monospace;">-0.8%</span>
+            </div>
+            <div class="opt3 watch-item">
+              <span class="opt3 watch-sym">MSFT</span>
+              <span class="opt3 watch-price up" style="font-size:8px;font-family:'JetBrains Mono',monospace;">+0.5%</span>
+            </div>
+            <div class="opt3 watch-item">
+              <span class="opt3 watch-sym">NVDA</span>
+              <span class="opt3 watch-price up" style="font-size:8px;font-family:'JetBrains Mono',monospace;">+3.1%</span>
+            </div>
+            <div class="opt3 watch-item">
+              <span class="opt3 watch-sym">AMZN</span>
+              <span class="opt3 watch-price down" style="font-size:8px;font-family:'JetBrains Mono',monospace;">-0.3%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="pick-btn pick-btn-3" onclick="alert('Great choice! Tell Claude: I want Option 3 — Premium Dark')">💎 Choose This Design</button>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- OPTION 4: Light Mode -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="option-wrapper">
+      <div class="option-label">
+        <span class="badge">☀️</span>
+        <div>
+          <div class="name" style="color:#60a5fa;">Light Mode</div>
+          <div class="desc">Clean white · Blue accents · Professional & airy</div>
+        </div>
+      </div>
+
+      <div class="mockup opt4">
+        <!-- Nav -->
+        <div class="opt4 nav">
+          <div style="display:flex;align-items:center;gap:20px">
+            <div class="opt4 logo">Alpha<span>Quant</span></div>
+            <div class="opt4 nav-tabs">
+              <div class="opt4 nav-tab active">Chart</div>
+              <div class="opt4 nav-tab">Screener</div>
+              <div class="opt4 nav-tab">Backtester</div>
+            </div>
+          </div>
+          <div style="background:#F1F5F9;border:1px solid #E2E8F0;padding:4px 12px;font-size:8px;color:#94A3B8;font-family:'JetBrains Mono',monospace;border-radius:6px;">⌕ Search symbol</div>
+        </div>
+        <!-- Quote Strip -->
+        <div class="opt4 quote-strip">
+          <div>
+            <div class="opt4 price">$189.45</div>
+            <div style="font-size:7px;color:#94A3B8;font-family:'JetBrains Mono',monospace;margin-top:2px">AAPL — Apple Inc.</div>
+          </div>
+          <div class="opt4 change">+2.34 (+1.25%)</div>
+          <div class="opt4 stat"><div class="opt4 stat-label">Mkt Cap</div><div class="opt4 stat-value">$2.9T</div></div>
+          <div class="opt4 stat"><div class="opt4 stat-label">P/E</div><div class="opt4 stat-value">31.2</div></div>
+          <div class="opt4 stat"><div class="opt4 stat-label">52W High</div><div class="opt4 stat-value blue">$199.6</div></div>
+          <div class="opt4 stat"><div class="opt4 stat-label">Volume</div><div class="opt4 stat-value">58.4M</div></div>
+        </div>
+        <!-- Body -->
+        <div class="opt4 body">
+          <div class="opt4 main">
+            <div class="opt4 indicator-row">
+              <div class="opt4 ind-btn">BB</div>
+              <div class="opt4 ind-btn">RSI</div>
+              <div class="opt4 ind-btn">MACD</div>
+            </div>
+            <div class="opt4 chart-area">
+              <div class="opt4 chart-label">AAPL · OHLCV · Bollinger Bands</div>
+              <svg width="100%" height="100%" viewBox="0 0 400 130" preserveAspectRatio="none" style="position:absolute;top:0;left:0">
+                <defs>
+                  <linearGradient id="g4" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.12"/>
+                    <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <polygon points="0,100 40,88 80,78 120,86 160,65 200,58 240,44 280,50 320,35 360,28 400,20 400,130 0,130" fill="url(#g4)"/>
+                <polyline points="0,100 40,88 80,78 120,86 160,65 200,58 240,44 280,50 320,35 360,28 400,20" fill="none" stroke="#3B82F6" stroke-width="1.5"/>
+                <!-- Light mode candles -->
+                <rect x="38" y="76" width="5" height="16" fill="#dc2626"/>
+                <line x1="40.5" y1="72" x2="40.5" y2="96" stroke="#dc2626" stroke-width="1"/>
+                <rect x="78" y="65" width="5" height="15" fill="#16a34a"/>
+                <line x1="80.5" y1="61" x2="80.5" y2="83" stroke="#16a34a" stroke-width="1"/>
+                <rect x="118" y="73" width="5" height="16" fill="#dc2626"/>
+                <rect x="158" y="52" width="5" height="16" fill="#16a34a"/>
+                <rect x="198" y="46" width="5" height="15" fill="#16a34a"/>
+                <rect x="238" y="34" width="5" height="14" fill="#16a34a"/>
+                <rect x="278" y="40" width="5" height="14" fill="#dc2626"/>
+                <rect x="318" y="26" width="5" height="14" fill="#16a34a"/>
+                <!-- BB bands -->
+                <polyline points="0,115 40,105 80,95 120,103 160,82 200,75 240,62 280,68 320,54 360,47 400,40" fill="none" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4,4"/>
+                <polyline points="0,85 40,72 80,62 120,70 160,48 200,42 240,28 280,34 320,20 360,12 400,5" fill="none" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4,4"/>
+              </svg>
+            </div>
+            <div class="opt4 mini-chart">
+              <svg width="100%" height="100%" viewBox="0 0 400 50" preserveAspectRatio="none">
+                <line x1="0" y1="20" x2="400" y2="20" stroke="#E2E8F0" stroke-width="0.8"/>
+                <line x1="0" y1="38" x2="400" y2="38" stroke="#E2E8F0" stroke-width="0.8"/>
+                <polyline points="0,35 40,30 80,38 120,25 160,28 200,20 240,22 280,15 320,18 360,12 400,14" fill="none" stroke="#3B82F6" stroke-width="1.5"/>
+              </svg>
+            </div>
+          </div>
+          <div class="opt4 sidebar">
+            <div class="opt4 sidebar-title">Watchlist</div>
+            <div class="opt4 watch-item">
+              <span class="opt4 watch-sym">AAPL</span>
+              <span class="opt4 watch-price up" style="font-size:8px;font-family:'JetBrains Mono',monospace;">+1.2%</span>
+            </div>
+            <div class="opt4 watch-item">
+              <span class="opt4 watch-sym">TSLA</span>
+              <span class="opt4 watch-price down" style="font-size:8px;font-family:'JetBrains Mono',monospace;">-0.8%</span>
+            </div>
+            <div class="opt4 watch-item">
+              <span class="opt4 watch-sym">MSFT</span>
+              <span class="opt4 watch-price up" style="font-size:8px;font-family:'JetBrains Mono',monospace;">+0.5%</span>
+            </div>
+            <div class="opt4 watch-item">
+              <span class="opt4 watch-sym">NVDA</span>
+              <span class="opt4 watch-price up" style="font-size:8px;font-family:'JetBrains Mono',monospace;">+3.1%</span>
+            </div>
+            <div class="opt4 watch-item">
+              <span class="opt4 watch-sym">AMZN</span>
+              <span class="opt4 watch-price down" style="font-size:8px;font-family:'JetBrains Mono',monospace;">-0.3%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="pick-btn pick-btn-4" onclick="alert('Great choice! Tell Claude: I want Option 4 — Light Mode')">☀️ Choose This Design</button>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- OPTION 5: GrowthArc Style — FULL WIDTH FEATURED          -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div style="max-width:1300px;margin:40px auto 0;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <span style="font-size:24px;">🚀</span>
+      <div>
+        <div style="font-size:20px;font-weight:800;letter-spacing:0.03em;background:linear-gradient(135deg,#9b51e0,#0693e3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">GrowthArc Inspired</div>
+        <div style="font-size:12px;color:#4a5568;font-family:'JetBrains Mono',monospace;margin-top:2px;">Purple-cyan gradient · Bold typography · Pill buttons · Agency-grade feel</div>
+      </div>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:8px;background:rgba(155,81,224,0.1);border:1px solid rgba(155,81,224,0.3);padding:6px 16px;border-radius:9999px;">
+        <span style="font-size:11px;color:#9b51e0;font-family:'JetBrains Mono',monospace;letter-spacing:0.08em;font-weight:600;">✦ FEATURED</span>
+      </div>
+    </div>
+
+    <!-- Full mockup -->
+    <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(155,81,224,0.25);box-shadow:0 20px 80px rgba(155,81,224,0.2),0 0 0 1px rgba(6,147,227,0.1);background:#0a0a14;">
+
+      <!-- NAV -->
+      <div style="background:#0d0d1a;border-bottom:1px solid rgba(255,255,255,0.06);padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:36px;">
+          <!-- Logo with gradient -->
+          <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:800;letter-spacing:0.05em;background:linear-gradient(135deg,#9b51e0,#0693e3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+            Alpha<span>Quant</span>
+          </div>
+          <!-- Tabs — pill style -->
+          <div style="display:flex;gap:4px;">
+            <div style="background:linear-gradient(135deg,#9b51e0,#0693e3);padding:6px 18px;border-radius:9999px;font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:0.08em;color:#fff;font-weight:600;text-transform:uppercase;cursor:pointer;">Chart</div>
+            <div style="background:transparent;padding:6px 18px;border-radius:9999px;font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:0.08em;color:rgba(255,255,255,0.3);text-transform:uppercase;cursor:pointer;">Screener</div>
+            <div style="background:transparent;padding:6px 18px;border-radius:9999px;font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:0.08em;color:rgba(255,255,255,0.3);text-transform:uppercase;cursor:pointer;">Backtester</div>
+            <div style="background:transparent;padding:6px 18px;border-radius:9999px;font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:0.08em;color:rgba(255,255,255,0.3);text-transform:uppercase;cursor:pointer;">Optimizer</div>
+          </div>
+        </div>
+        <!-- Search — pill style -->
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:9999px;padding:7px 20px;font-size:11px;color:rgba(255,255,255,0.25);font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:8px;min-width:180px;">
+            <span>⌕</span> Search symbol...
+          </div>
+          <div style="background:linear-gradient(135deg,#9b51e0,#0693e3);padding:7px 20px;border-radius:9999px;font-size:11px;font-family:'JetBrains Mono',monospace;color:#fff;font-weight:600;letter-spacing:0.06em;cursor:pointer;">LIVE ●</div>
+        </div>
+      </div>
+
+      <!-- QUOTE HERO STRIP — gradient accent -->
+      <div style="background:linear-gradient(90deg,rgba(155,81,224,0.12) 0%,rgba(6,147,227,0.08) 50%,transparent 100%);border-bottom:1px solid rgba(255,255,255,0.05);padding:0 32px;height:80px;display:flex;align-items:center;gap:32px;">
+        <div>
+          <div style="font-family:'Sora',sans-serif;font-size:32px;font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1;">$189.45</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.35);font-family:'JetBrains Mono',monospace;margin-top:4px;letter-spacing:0.08em;">AAPL — Apple Inc.</div>
+        </div>
+        <!-- Change badge pill -->
+        <div style="background:rgba(0,208,132,0.12);border:1px solid rgba(0,208,132,0.3);padding:5px 14px;border-radius:9999px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#00d084;font-weight:600;">▲ +2.34 (+1.25%)</span>
+        </div>
+        <!-- Stats — pill cards -->
+        <div style="display:flex;gap:10px;margin-left:8px;">
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:8px 16px;">
+            <div style="font-size:8px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.12em;font-family:'JetBrains Mono',monospace;">Mkt Cap</div>
+            <div style="font-size:13px;color:#fff;font-family:'JetBrains Mono',monospace;font-weight:600;margin-top:2px;">$2.9T</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:8px 16px;">
+            <div style="font-size:8px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.12em;font-family:'JetBrains Mono',monospace;">P/E Ratio</div>
+            <div style="font-size:13px;color:#fff;font-family:'JetBrains Mono',monospace;font-weight:600;margin-top:2px;">31.2</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:8px 16px;">
+            <div style="font-size:8px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.12em;font-family:'JetBrains Mono',monospace;">Volume</div>
+            <div style="font-size:13px;color:#fff;font-family:'JetBrains Mono',monospace;font-weight:600;margin-top:2px;">58.4M</div>
+          </div>
+          <div style="background:rgba(155,81,224,0.1);border:1px solid rgba(155,81,224,0.25);border-radius:12px;padding:8px 16px;">
+            <div style="font-size:8px;color:rgba(155,81,224,0.7);text-transform:uppercase;letter-spacing:0.12em;font-family:'JetBrains Mono',monospace;">52W High</div>
+            <div style="font-size:13px;font-family:'JetBrains Mono',monospace;font-weight:600;margin-top:2px;background:linear-gradient(135deg,#9b51e0,#0693e3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">$199.6</div>
+          </div>
+          <div style="background:rgba(255,105,0,0.08);border:1px solid rgba(255,105,0,0.2);border-radius:12px;padding:8px 16px;">
+            <div style="font-size:8px;color:rgba(255,105,0,0.6);text-transform:uppercase;letter-spacing:0.12em;font-family:'JetBrains Mono',monospace;">52W Low</div>
+            <div style="font-size:13px;color:#ff6900;font-family:'JetBrains Mono',monospace;font-weight:600;margin-top:2px;">$124.2</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BODY -->
+      <div style="display:flex;height:420px;">
+
+        <!-- MAIN CHART AREA -->
+        <div style="flex:1;padding:20px 24px;overflow-y:auto;">
+
+          <!-- Indicator + Period controls -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:9px;color:rgba(255,255,255,0.25);font-family:'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;margin-right:4px;">Indicators</span>
+              <!-- Active pill buttons -->
+              <div style="background:linear-gradient(135deg,#9b51e0,#0693e3);padding:4px 14px;border-radius:9999px;font-size:9px;font-family:'JetBrains Mono',monospace;color:#fff;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;">BB</div>
+              <div style="background:linear-gradient(135deg,#9b51e0,#0693e3);padding:4px 14px;border-radius:9999px;font-size:9px;font-family:'JetBrains Mono',monospace;color:#fff;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;">RSI</div>
+              <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:4px 14px;border-radius:9999px;font-size:9px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.08em;">MACD</div>
+            </div>
+            <div style="display:flex;gap:4px;">
+              <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:4px 12px;border-radius:9999px;font-size:9px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.3);">1mo</div>
+              <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:4px 12px;border-radius:9999px;font-size:9px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.3);">3mo</div>
+              <div style="background:linear-gradient(135deg,#9b51e0,#0693e3);padding:4px 12px;border-radius:9999px;font-size:9px;font-family:'JetBrains Mono',monospace;color:#fff;font-weight:600;">6mo</div>
+              <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:4px 12px;border-radius:9999px;font-size:9px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.3);">1y</div>
+              <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:4px 12px;border-radius:9999px;font-size:9px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.3);">5y</div>
+            </div>
+          </div>
+
+          <!-- Main chart card -->
+          <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:12px;margin-bottom:10px;position:relative;overflow:hidden;">
+            <!-- Gradient top border accent -->
+            <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#9b51e0,#0693e3,transparent);"></div>
+            <div style="font-size:9px;color:rgba(255,255,255,0.25);font-family:'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">AAPL · OHLCV · Bollinger Bands (20, 2)</div>
+            <svg width="100%" height="180" viewBox="0 0 900 180" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="garc1" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#9b51e0"/>
+                  <stop offset="100%" stop-color="#0693e3"/>
+                </linearGradient>
+                <linearGradient id="garc1fill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#9b51e0" stop-opacity="0.2"/>
+                  <stop offset="100%" stop-color="#0693e3" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <!-- BB upper band -->
+              <polyline points="0,145 60,132 120,118 180,128 240,105 300,98 360,82 420,90 480,70 540,76 600,58 660,65 720,48 780,54 840,38 900,30" fill="none" stroke="rgba(155,81,224,0.3)" stroke-width="1" stroke-dasharray="5,5"/>
+              <!-- BB lower band -->
+              <polyline points="0,165 60,155 120,142 180,150 240,128 300,120 360,104 420,112 480,94 540,98 600,82 660,88 720,72 780,78 840,62 900,55" fill="none" stroke="rgba(6,147,227,0.3)" stroke-width="1" stroke-dasharray="5,5"/>
+              <!-- Area fill -->
+              <polygon points="0,155 60,145 120,130 180,140 240,118 300,110 360,94 420,102 480,82 540,88 600,70 660,78 720,60 780,66 840,50 900,42 900,180 0,180" fill="url(#garc1fill)"/>
+              <!-- Main line -->
+              <polyline points="0,155 60,145 120,130 180,140 240,118 300,110 360,94 420,102 480,82 540,88 600,70 660,78 720,60 780,66 840,50 900,42" fill="none" stroke="url(#garc1)" stroke-width="2.5"/>
+              <!-- Candles -->
+              <rect x="58" y="130" width="8" height="18" fill="#ff4d6d" rx="1"/>
+              <line x1="62" y1="125" x2="62" y2="152" stroke="#ff4d6d" stroke-width="1.5"/>
+              <rect x="118" y="118" width="8" height="16" fill="#00d084" rx="1"/>
+              <line x1="122" y1="113" x2="122" y2="138" stroke="#00d084" stroke-width="1.5"/>
+              <rect x="178" y="128" width="8" height="16" fill="#ff4d6d" rx="1"/>
+              <rect x="238" y="106" width="8" height="16" fill="#00d084" rx="1"/>
+              <rect x="298" y="98" width="8" height="16" fill="#00d084" rx="1"/>
+              <rect x="358" y="82" width="8" height="15" fill="#00d084" rx="1"/>
+              <rect x="418" y="90" width="8" height="16" fill="#ff4d6d" rx="1"/>
+              <rect x="478" y="70" width="8" height="16" fill="#00d084" rx="1"/>
+              <rect x="538" y="76" width="8" height="15" fill="#ff4d6d" rx="1"/>
+              <rect x="598" y="58" width="8" height="16" fill="#00d084" rx="1"/>
+              <rect x="658" y="65" width="8" height="16" fill="#00d084" rx="1"/>
+              <rect x="718" y="48" width="8" height="15" fill="#00d084" rx="1"/>
+              <rect x="778" y="54" width="8" height="15" fill="#ff4d6d" rx="1"/>
+              <rect x="838" y="38" width="8" height="15" fill="#00d084" rx="1"/>
+            </svg>
+          </div>
+
+          <!-- RSI mini chart card -->
+          <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:12px;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#0693e3,transparent);"></div>
+            <div style="font-size:9px;color:rgba(255,255,255,0.25);font-family:'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">RSI · 14</div>
+            <svg width="100%" height="55" viewBox="0 0 900 55" preserveAspectRatio="none">
+              <line x1="0" y1="16" x2="900" y2="16" stroke="rgba(255,105,0,0.2)" stroke-width="1" stroke-dasharray="5,5"/>
+              <line x1="0" y1="44" x2="900" y2="44" stroke="rgba(0,208,132,0.2)" stroke-width="1" stroke-dasharray="5,5"/>
+              <polyline points="0,35 60,30 120,38 180,25 240,20 300,28 360,18 420,14 480,22 540,18 600,12 660,16 720,10 780,14 840,8 900,11" fill="none" stroke="#0693e3" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- WATCHLIST SIDEBAR -->
+        <div style="width:200px;border-left:1px solid rgba(255,255,255,0.05);background:rgba(0,0,0,0.2);padding:16px;">
+          <div style="font-size:9px;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:0.12em;font-family:'JetBrains Mono',monospace;margin-bottom:12px;">Watchlist</div>
+          <!-- Watch items as cards -->
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="background:rgba(155,81,224,0.08);border:1px solid rgba(155,81,224,0.15);border-radius:10px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:11px;font-weight:700;color:#fff;">AAPL</div>
+                <div style="font-size:8px;color:rgba(255,255,255,0.3);font-family:'JetBrains Mono',monospace;">$189.45</div>
+              </div>
+              <div style="background:rgba(0,208,132,0.15);border:1px solid rgba(0,208,132,0.25);border-radius:9999px;padding:2px 8px;font-size:8px;color:#00d084;font-family:'JetBrains Mono',monospace;font-weight:600;">+1.2%</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:11px;font-weight:700;color:#fff;">TSLA</div>
+                <div style="font-size:8px;color:rgba(255,255,255,0.3);font-family:'JetBrains Mono',monospace;">$248.12</div>
+              </div>
+              <div style="background:rgba(255,77,109,0.12);border:1px solid rgba(255,77,109,0.25);border-radius:9999px;padding:2px 8px;font-size:8px;color:#ff4d6d;font-family:'JetBrains Mono',monospace;font-weight:600;">-0.8%</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:11px;font-weight:700;color:#fff;">MSFT</div>
+                <div style="font-size:8px;color:rgba(255,255,255,0.3);font-family:'JetBrains Mono',monospace;">$415.80</div>
+              </div>
+              <div style="background:rgba(0,208,132,0.15);border:1px solid rgba(0,208,132,0.25);border-radius:9999px;padding:2px 8px;font-size:8px;color:#00d084;font-family:'JetBrains Mono',monospace;font-weight:600;">+0.5%</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:11px;font-weight:700;color:#fff;">NVDA</div>
+                <div style="font-size:8px;color:rgba(255,255,255,0.3);font-family:'JetBrains Mono',monospace;">$875.30</div>
+              </div>
+              <div style="background:rgba(0,208,132,0.15);border:1px solid rgba(0,208,132,0.25);border-radius:9999px;padding:2px 8px;font-size:8px;color:#00d084;font-family:'JetBrains Mono',monospace;font-weight:600;">+3.1%</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:11px;font-weight:700;color:#fff;">AMZN</div>
+                <div style="font-size:8px;color:rgba(255,255,255,0.3);font-family:'JetBrains Mono',monospace;">$192.40</div>
+              </div>
+              <div style="background:rgba(255,77,109,0.12);border:1px solid rgba(255,77,109,0.25);border-radius:9999px;padding:2px 8px;font-size:8px;color:#ff4d6d;font-family:'JetBrains Mono',monospace;font-weight:600;">-0.3%</div>
+            </div>
+          </div>
+          <!-- Add button -->
+          <div style="margin-top:10px;background:linear-gradient(135deg,rgba(155,81,224,0.15),rgba(6,147,227,0.15));border:1px solid rgba(155,81,224,0.2);border-radius:9999px;padding:6px;text-align:center;cursor:pointer;font-size:9px;font-family:'JetBrains Mono',monospace;letter-spacing:0.08em;background-clip:text;">
+            <span style="background:linear-gradient(135deg,#9b51e0,#0693e3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;">+ Add Symbol</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Choose button -->
+    <button class="pick-btn" style="margin-top:14px;background:linear-gradient(135deg,#9b51e0,#0693e3);color:#fff;border:none;font-weight:700;letter-spacing:0.12em;box-shadow:0 8px 30px rgba(155,81,224,0.4);" onclick="alert('Great choice! Tell Claude: I want the GrowthArc Style design')">
+      🚀 Choose GrowthArc Style
+    </button>
+  </div>
+
+  <p class="footer" style="margin-top:40px;">AlphaQuant · Design Preview · Tell Claude which option you want applied</p>
+
+</body>
+</html>
